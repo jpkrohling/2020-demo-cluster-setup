@@ -20,21 +20,21 @@ spec:
           imagePullPolicy: Always
           env:
             - name: PGHOST
-              value: ${PG_SERVICE_NAME}
+              value: postgresql
             - name: PGDATABASE
               valueFrom:
                 secretKeyRef:
-                  name: ${PG_SECRET}
+                  name: openshift-pgsql12-primary-secret
                   key: database-db
             - name: PGUSER
               valueFrom:
                 secretKeyRef:
-                  name: ${PG_SECRET}
+                  name: openshift-pgsql12-primary-secret
                   key: database-username
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: ${PG_SECRET}
+                  name: openshift-pgsql12-primary-secret
                   key: database-username-password
           command: ["/usr/pgsql-12/bin/psql"]
           args:

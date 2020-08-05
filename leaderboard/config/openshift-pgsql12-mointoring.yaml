@@ -9,7 +9,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 200Gi
+      storage: 2Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -21,7 +21,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 200Gi
+      storage: 2Gi
 ---
 kind: Secret
 apiVersion: v1
@@ -66,8 +66,8 @@ spec:
           imagePullPolicy: Always
           resources:
             limits:
-              memory: "8Gi"
-              cpu: "6"
+              memory: "1Gi"
+              cpu: "1"
           ports:
             - name: tcp
               containerPort: 5432
@@ -84,9 +84,9 @@ spec:
               value: "800"
             # 25% of the memory in mb
             - name: PG_SHARED_BUFFERS
-              value: "2048"
+              value: "250"
             - name: PG_WORK_MEM
-              value: "1536"
+              value: "250"
             # 75% of the memory in GB
             - name: PG_EFFECTIVE_CACHE_SIZE
               value: "6"

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 installLeaderboardMessaging::run() {
-  header_text "\n\n######## leaderboard::deploy:: Install Leaderboard Messaging ########\n"  
+  header_text "\n\n######## leaderboard::deploy:: Install Leaderboard Messaging ########\n"
+
   cat "$(configdir)/leaderboard-messaging.yaml" | envsubst \
     | oc apply -n "$(project)" --dry-run=${DRY_RUN:-false} -f -
 }

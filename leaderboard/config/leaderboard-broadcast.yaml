@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/part-of: leaderboard-messaging
   name: leaderboard-broadcast
 spec:
-  replicas: ${LEADERBOARD_BROADCAST_REPLICAS}
+  replicas: 1
   selector:
     matchLabels:
       app: leaderboard-broadcast
@@ -16,19 +16,19 @@ spec:
         app: leaderboard-broadcast
     spec:
       containers:
-        - image: ${LEADERBOARD_BROADCAST_IMAGE}
+        - image: quay.io/redhatdemo/2020-leaderboard-broadcast
           imagePullPolicy: Always
           name: broadcast
           env:
             - name: QUARKUS_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: ${PG_SECRET}
+                  name: openshift-pgsql12-primary-secret
                   key: database-username
             - name: QUARKUS_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: ${PG_SECRET}
+                  name: openshift-pgsql12-primary-secret
                   key: database-username-password
           ports:
             - containerPort: 8080

@@ -100,7 +100,7 @@ objects:
               limits:
                 memory: 2048Mi
               requests:
-                cpu: "1"
+                cpu: "0.5"
                 memory: 2048Mi
             volumeMounts:
             - mountPath: /config

@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/part-of: leaderboard-messaging
   name: leaderboard-messaging
 spec:
-  replicas: ${LEADERBOARD_MESSAGING_REPLICAS}
+  replicas: 1
   selector:
     matchLabels:
       app: leaderboard-messaging
@@ -16,7 +16,7 @@ spec:
         app: leaderboard-messaging
     spec:
       containers:
-        - image: ${LEADERBOARD_MESSAGING_IMAGE}
+        - image: quay.io/redhatdemo/2020-leaderboard-messaging
           imagePullPolicy: Always
           name: messaging
           env:

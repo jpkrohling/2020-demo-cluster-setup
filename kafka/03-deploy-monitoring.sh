@@ -4,7 +4,7 @@ NAMESPACE=${KAFKA_NAMESPACE:-kafka-demo}
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 # Prometheus
-cat $DIR/monitoring/prometheus.yaml | sed -e "s/namespace: .*/namespace: $NAMESPACE/;s/regex: myproject/regex: $NAMESPACE/" > $DIR/monitoring/prometheus-deploy.yaml
+cat $DIR/monitoring/prometheus.yaml | gsed -e "s/namespace: .*/namespace: $NAMESPACE/;s/regex: myproject/regex: $NAMESPACE/" > $DIR/monitoring/prometheus-deploy.yaml
 
 oc apply -f $DIR/monitoring/alerting-rules.yaml -n $NAMESPACE
 oc apply -f $DIR/monitoring/prometheus-deploy.yaml -n $NAMESPACE
@@ -22,26 +22,26 @@ echo "...Prometheus server ready"
 # build the Kafka dashboard
 cp $DIR/monitoring/dashboards/strimzi-kafka.json $DIR/monitoring/dashboards/strimzi-kafka-dashboard.json
 
-sed -i 's/${DS_PROMETHEUS}/Prometheus/' $DIR/monitoring/dashboards/strimzi-kafka-dashboard.json
-sed -i 's/DS_PROMETHEUS/Prometheus/' $DIR/monitoring/dashboards/strimzi-kafka-dashboard.json
+gsed -i 's/${DS_PROMETHEUS}/Prometheus/' $DIR/monitoring/dashboards/strimzi-kafka-dashboard.json
+gsed -i 's/DS_PROMETHEUS/Prometheus/' $DIR/monitoring/dashboards/strimzi-kafka-dashboard.json
 
 # build the Zookeeper dashboard
 cp $DIR/monitoring/dashboards/strimzi-zookeeper.json $DIR/monitoring/dashboards/strimzi-zookeeper-dashboard.json
 
-sed -i 's/${DS_PROMETHEUS}/Prometheus/' $DIR/monitoring/dashboards/strimzi-zookeeper-dashboard.json
-sed -i 's/DS_PROMETHEUS/Prometheus/' $DIR/monitoring/dashboards/strimzi-zookeeper-dashboard.json
+gsed -i 's/${DS_PROMETHEUS}/Prometheus/' $DIR/monitoring/dashboards/strimzi-zookeeper-dashboard.json
+gsed -i 's/DS_PROMETHEUS/Prometheus/' $DIR/monitoring/dashboards/strimzi-zookeeper-dashboard.json
 
 # build the Kafka Mirror Maker 2 dashboard
 cp $DIR/monitoring/dashboards/strimzi-kafka-mirror-maker-2.json $DIR/monitoring/dashboards/strimzi-kafka-mirror-maker-2-dashboard.json
 
-sed -i 's/${DS_PROMETHEUS}/Prometheus/' $DIR/monitoring/dashboards/strimzi-kafka-mirror-maker-2-dashboard.json
-sed -i 's/DS_PROMETHEUS/Prometheus/' $DIR/monitoring/dashboards/strimzi-kafka-mirror-maker-2-dashboard.json
+gsed -i 's/${DS_PROMETHEUS}/Prometheus/' $DIR/monitoring/dashboards/strimzi-kafka-mirror-maker-2-dashboard.json
+gsed -i 's/DS_PROMETHEUS/Prometheus/' $DIR/monitoring/dashboards/strimzi-kafka-mirror-maker-2-dashboard.json
 
 # build the Kafka Exporter dashboard
 cp $DIR/monitoring/dashboards/strimzi-kafka-exporter.json $DIR/monitoring/dashboards/strimzi-kafka-exporter-dashboard.json
 
-sed -i 's/${DS_PROMETHEUS}/Prometheus/' $DIR/monitoring/dashboards/strimzi-kafka-exporter-dashboard.json
-sed -i 's/DS_PROMETHEUS/Prometheus/' $DIR/monitoring/dashboards/strimzi-kafka-exporter-dashboard.json
+gsed -i 's/${DS_PROMETHEUS}/Prometheus/' $DIR/monitoring/dashboards/strimzi-kafka-exporter-dashboard.json
+gsed -i 's/DS_PROMETHEUS/Prometheus/' $DIR/monitoring/dashboards/strimzi-kafka-exporter-dashboard.json
 
 oc create configmap grafana-config \
     --from-file=datasource.yaml=$DIR/monitoring/dashboards/datasource.yaml \

@@ -2,9 +2,11 @@
 
 installPostgresql::run() {
   header_text "Deploying PostgeSQL"
-  cat"$(configdir)/openshift-pgsql12-secret.yaml" 'metadata.name' | envsubst \
-    | oc create -n"$(project)" -f -
-  oc apply -n"$(project)" -f "$(configdir)/openshift-pgsql12.yaml"    
+
+  #cat "$(configdir)/openshift-pgsql12-secret.yaml" | envsubst \
+  #  | oc create -n"$(project)" -f -
+  oc create -n "$(project)" -f "$(configdir)/openshift-pgsql12-secret.yaml"
+  oc apply -n "$(project)" -f "$(configdir)/openshift-pgsql12.yaml"    
   sleep 5; while echo && oc get pods -n "$(project)" --selector=app=postgresql \
     | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
   oc create configmap -n"$(project)" leaderboard-schema \

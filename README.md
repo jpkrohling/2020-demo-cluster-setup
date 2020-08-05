@@ -2,6 +2,64 @@
 
 This repo contains all scripts to prepare an OpenShift 4 cluster to run the 2020 Live Keynote Demo.
 
+## TL;DR
+
+IMPORTANT: Tested with Mac OS if you are in Linux do a replace of some scripts from `gsed` to `sed`.
+
+IMPORTANT: If charset is not UTF run: `export LC_ALL=en_US.UTF-8`
+
+To deploy the Apache Kafka infrastructure:
+
+```bash
+make kafka
+```
+
+> In order to deploy Kafka, this version of the [yq](https://github.com/mikefarah/yq) tool is needed.
+
+To deploy datagrid:
+
+```bash
+make datagrid
+```
+
+To deploy admin:
+
+```bash
+make admin
+```
+
+To deploy leaderboard:
+
+```bash
+make leaderboard_project
+make leaderboard_install_postgresql
+
+make leaderboard_install_api
+make leaderboard_install_aggregator
+make leaderboard_install_messaging
+make leaderboard_install_broadcast
+
+make visualization
+```
+
+To deploy Digit Recognition Service:
+
+```bash
+make ml
+```
+
+To deploy score service;
+
+```bash
+make quarkus_scoring
+```
+
+To deploy frontend:
+
+```bash
+make frontend
+```
+
 ## Setup
 
 Required tooling includes [oc](https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/) to deploy to OpenShift, [yq](https://github.com/mikefarah/yq) for Kafka, and [skupper](https://github.com/skupperproject/skupper-cli/releases/download/0.1.0/) for the messaging interconnect.
@@ -33,7 +91,6 @@ make kafka
 ```
 
 > In order to deploy Kafka, this version of the [yq](https://github.com/mikefarah/yq) tool is needed.
-
 
 ## HQ Applications
 

@@ -1,6 +1,9 @@
-.env
 .repo/
 .secrets/
+0.17.0
+skupper
+token.yaml
+kafka/clusters.lbs
 
 # certs
 *.pem

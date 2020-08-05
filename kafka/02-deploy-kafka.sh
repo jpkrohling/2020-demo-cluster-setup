@@ -7,8 +7,8 @@ EXPOSE=${KAFKA_EXPOSE:-false}
 EXPORTER=${KAFKA_EXPORTER:-true}
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
-sed "s/my-cluster/$CLUSTER/" $DIR/cluster/kafka-persistent-with-metrics.yaml > $DIR/cluster/$CLUSTER-kafka-persistent-with-metrics.yaml
-sed -i "s/my-kafka-version/$VERSION/" $DIR/cluster/$CLUSTER-kafka-persistent-with-metrics.yaml
+gsed "s/my-cluster/$CLUSTER/" $DIR/cluster/kafka-persistent-with-metrics.yaml > $DIR/cluster/$CLUSTER-kafka-persistent-with-metrics.yaml
+gsed -i "s/my-kafka-version/$VERSION/" $DIR/cluster/$CLUSTER-kafka-persistent-with-metrics.yaml
 
 # if Kafka Exporter is enabled, the corresponding YAML is added to the Kafka resource
 if [ "$EXPORTER" == "true" ]; then

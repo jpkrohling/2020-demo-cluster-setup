@@ -24,12 +24,13 @@ else
     echo "Installing Strimzi via release"
 
     # download Strimzi release
-    wget https://github.com/strimzi/strimzi-kafka-operator/releases/download/$KAFKA_OPERATOR_VERSION/strimzi-$KAFKA_OPERATOR_VERSION.tar.gz
+    echo "https://github.com/strimzi/strimzi-kafka-operator/releases/download/$KAFKA_OPERATOR_VERSION/strimzi-$KAFKA_OPERATOR_VERSION.tar.gz"
+    curl -LO "https://github.com/strimzi/strimzi-kafka-operator/releases/download/$KAFKA_OPERATOR_VERSION/strimzi-$KAFKA_OPERATOR_VERSION.tar.gz"
     mkdir $DIR/strimzi-$KAFKA_OPERATOR_VERSION
     tar xzf strimzi-$KAFKA_OPERATOR_VERSION.tar.gz -C $DIR/strimzi-$KAFKA_OPERATOR_VERSION --strip 1
     rm strimzi-$KAFKA_OPERATOR_VERSION.tar.gz
 
-    sed -i "s/namespace: .*/namespace: $NAMESPACE/" $DIR/strimzi-$KAFKA_OPERATOR_VERSION/install/cluster-operator/*RoleBinding*.yaml
+    gsed -i "s/namespace: .*/namespace: $NAMESPACE/" $DIR/strimzi-$KAFKA_OPERATOR_VERSION/install/cluster-operator/*RoleBinding*.yaml
 
     oc apply -f $DIR/strimzi-$KAFKA_OPERATOR_VERSION/install/cluster-operator -n $NAMESPACE
     oc apply -f $DIR/strimzi-$KAFKA_OPERATOR_VERSION/install/strimzi-admin -n $NAMESPACE

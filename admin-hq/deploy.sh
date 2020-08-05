@@ -19,8 +19,11 @@ echo "Deploying the Skupper Network"
 ## This places the skupper executable in the current directory.  Move the executable to a location that is in the execution path.
 ##
 
-SKUPPER_NAME="$(echo ${CLUSTER_NAME} | sed 's/ /_/g')"
-skupper init --enable-router-console --router-console-auth openshift --id ${SKUPPER_NAME}
+curl -fL https://github.com/skupperproject/skupper-cli/releases/download/0.1.0/skupper-cli-0.1.0-mac-amd64.tgz | tar -xzf -
+
+SKUPPER_NAME="$(echo ${CLUSTER_NAME} | gsed 's/ /_/g')"
+./skupper init --enable-router-console --router-console-auth openshift --id ${SKUPPER_NAME}
+./skupper connection-token token.yaml
 
 echo "Deploying Admin HQ Applications"
 

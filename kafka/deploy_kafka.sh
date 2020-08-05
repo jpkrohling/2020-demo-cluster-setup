@@ -1,10 +1,10 @@
 #!/bin/bash
 
-echo "KAFKA_OPERATOR=" $KAFKA_OPERATOR
-echo "KAFKA_OPERATOR_VERSION=" $KAFKA_OPERATOR_VERSION
-echo "KAFKA_NAMESPACE=" $KAFKA_NAMESPACE
-echo "KAFKA_CLUSTER=" $KAFKA_CLUSTER
-echo "KAFKA_EXPOSE=" $KAFKA_EXPOSE
+echo "KAFKA_OPERATOR="$KAFKA_OPERATOR
+echo "KAFKA_OPERATOR_VERSION="$KAFKA_OPERATOR_VERSION
+echo "KAFKA_NAMESPACE="$KAFKA_NAMESPACE
+echo "KAFKA_CLUSTER="$KAFKA_CLUSTER
+echo "KAFKA_EXPOSE="$KAFKA_EXPOSE
 
 oc project $KAFKA_NAMESPACE 2> /dev/null || oc new-project $KAFKA_NAMESPACE
 
@@ -23,7 +23,7 @@ else
     exit 1
 fi
 $DIR/02-deploy-kafka.sh
-$DIR/03-deploy-monitoring.sh
+# $DIR/03-deploy-monitoring.sh
 $DIR/04-deploy-topics.sh
 
 echo ""

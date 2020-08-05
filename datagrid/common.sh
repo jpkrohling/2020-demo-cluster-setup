@@ -1,5 +1,5 @@
 #!/bin/bash
-INSTANCES=${1:-2}
+INSTANCES=${1:-1}
 RESOURCE_DIR=$(dirname "$0")
 PROJECT="datagrid-demo"
 REST_USER="lnd1-ffm1"

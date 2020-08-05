@@ -27,10 +27,10 @@ parameters:
     value: "9092"
     required: true
   - name: KAFKA_TRANSACTION_TOPIC
-    value: "transactions"
+    value: "transactions.scoring"
     required: true
   - name: REPLICAS
-    value: "5"
+    value: "1"
     required: true
   - name: PORT
     value: "8080"
@@ -51,7 +51,7 @@ parameters:
   - name: CONTAINER_LIMIT_CPU
     value: 1000m
   - name: CONTAINER_LIMIT_MEMORY
-    value: 2000Mi
+    value: 1000Mi
 
 objects:
   - apiVersion: v1

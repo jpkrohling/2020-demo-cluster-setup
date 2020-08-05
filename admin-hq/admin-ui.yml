@@ -12,14 +12,14 @@ parameters:
     value: ui
     required: true
   - name: REPLICAS
-    value: "2"
+    value: "1"
     required: true
   - name: IMAGE_REPOSITORY
     displayName: Image Repository
     value: quay.io/redhatdemo/2020-admin-ui:latest
     required: true
   - name: CONTAINER_REQUEST_CPU
-    value: 500m
+    value: 400m
   - name: CONTAINER_REQUEST_MEMORY
     value: 500Mi
   - name: CONTAINER_LIMIT_CPU

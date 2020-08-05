@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
 
 installLeaderboardAPI::run() {
-  header_text "\n\n######## leaderboard::deploy:: Install Leaderboard API ########\n"  
+  header_text "\n\n######## leaderboard::deploy:: Install Leaderboard API ########\n" 
+
+  curl -fL https://github.com/skupperproject/skupper-cli/releases/download/0.1.0/skupper-cli-0.1.0-mac-amd64.tgz | tar -xzf -
+
+  SKUPPER_NAME="$(echo ${CLUSTER_NAME} | gsed 's/ /_/g')"
+  ./skupper init --enable-router-console --router-console-auth openshift --id ${SKUPPER_NAME}
+  ./skupper connect token.yaml
+
   cat "$(configdir)/leaderboard-api.yaml" | envsubst \
     | oc apply -n "$(project)" --dry-run=${DRY_RUN:-false} -f -
+
 }
 
 installLeaderboardAPI::usage(){

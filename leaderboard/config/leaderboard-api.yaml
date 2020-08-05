@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/part-of: leaderboard-backend
   name: leaderboard-api
 spec:
-  replicas: ${LEADERBOARD_API_REPLICAS}
+  replicas: 1
   selector:
     matchLabels:
       app: leaderboard-api
@@ -16,19 +16,19 @@ spec:
         app: leaderboard-api
     spec:
       containers:
-        - image: ${LEADERBOARD_API_IMAGE}
+        - image: quay.io/redhatdemo/2020-leaderboard-api
           imagePullPolicy: Always
           name: api
           env:
             - name: QUARKUS_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: ${PG_SECRET}
+                  name: openshift-pgsql12-primary-secret
                   key: database-username
             - name: QUARKUS_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: ${PG_SECRET}
+                  name: openshift-pgsql12-primary-secret
                   key: database-username-password
           ports:
             - containerPort: 8080
